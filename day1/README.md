@@ -39,7 +39,7 @@ Set up log forwarding from Apache on an Ubuntu VM to Splunk Enterprise, analyze 
 2. **Configure Splunk Universal Forwarder (Ubuntu VM)**:
     ```bash
     /opt/splunkforwarder/bin/splunk start
-    /opt/splunkforwarder/bin/splunk add forward-server 192.168.56.1:9997 -auth admin:<password>
+    /opt/splunkforwarder/bin/splunk add forward-server <splunk ip>:9997 -auth admin:<password>
     ```
 
 3. **Install and Start Apache2 (Ubuntu VM)**:
@@ -80,11 +80,6 @@ Set up log forwarding from Apache on an Ubuntu VM to Splunk Enterprise, analyze 
     index=main sourcetype=access_combined uri_path IN ("/admin*", "/wp-admin*")
     ```
 
-#### 📊 Visualizations:
-- Created **Column Chart** of 404 errors grouped by `uri_path`
-- Saved search as: `"404 Error URLs"`
-
----
 
 
 - **404 Errors Search**  
