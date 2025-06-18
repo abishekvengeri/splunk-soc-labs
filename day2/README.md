@@ -16,7 +16,7 @@ Build a **real-time Splunk dashboard** to assist in **Security Operations Center
 
 ---
 
-## 🧪 Lab Environment
+##  Lab Environment
 
 | Component              | Details                                               |
 |------------------------|-------------------------------------------------------|
