@@ -88,10 +88,10 @@ Set up log forwarding from Apache on an Ubuntu VM to Splunk Enterprise, analyze 
 
 
 - **404 Errors Search**  
-  ![404 Errors](screenshots/day1_404_errors.png)
+  ![404 Errors](day1_404_errors.png.png)
 
 - **Admin Path Requests Search**  
-  ![Admin Paths](screenshots/day1_admin_paths.png)
+  ![Admin Paths](day1_admin_paths.png.png)
 
 
 
