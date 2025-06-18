@@ -85,6 +85,6 @@ index=main sourcetype=access_combined uri_path IN ("/admin*", "/wp-admin*")
 
 
 ### 🔍 Dashboard Overview  
-![Dashboard Overview](dashboard_overview.mp4)
+![Dashboard Overview](dashboard_overview.mp4.mp4)
 
 
