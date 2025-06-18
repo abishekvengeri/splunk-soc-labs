@@ -1,98 +1,100 @@
-Splunk SOC Labs: Day 1 - Log Ingestion and Threat Detection
-Overview
-This repository documents my two-week journey to master Splunk for Security Operations Center (SOC) tasks and prepare for the Certified SOC Analyst (CSA) exam. On Day 1, I configured the Splunk Universal Forwarder on an Ubuntu Desktop VM to send Apache web server logs to Splunk Enterprise on my Windows laptop. I performed searches to detect suspicious activity (e.g., 404 errors, admin path requests) and visualized results, simulating real-world SOC threat detection.
-Day 1: Forwarding Apache Logs and Detecting Suspicious Activity
-Objective
-Set up log forwarding from Apache on an Ubuntu VM to Splunk Enterprise, analyze logs for potential threats (e.g., scanning attempts), and create visualizations to aid SOC analysis.
-Environment
-
-Host: Windows laptop running Splunk Enterprise (accessible at http://localhost:8000).
-VM: Ubuntu Desktop in VirtualBox with Splunk Universal Forwarder and Apache web server.
-Tools: Splunk Enterprise, Splunk Universal Forwarder, Apache, Firefox, curl.
-
-Setup Instructions
-
-Verify Splunk Enterprise (Windows):
-
-Started Splunk: "C:\Program Files\Splunk\bin\splunk" start.
-Enabled receiving on port 9997: Settings > Forwarding and Receiving > Receive Data.
-Accessed Splunk at http://localhost:8000.
+#  Splunk SOC Labs: Day 1 - Log Ingestion and Threat Detection
 
 
-Verify Splunk Universal Forwarder (Ubuntu VM):
+This repository documents my **two-week journey to master Splunk** for Security Operations Center (SOC) tasks.
 
-Started Forwarder: /opt/splunkforwarder/bin/splunk start.
-Configured to forward to Windows host (e.g., 192.168.56.1:9997):/opt/splunkforwarder/bin/splunk add forward-server 192.168.56.1:9997 -auth admin:<password>
+On **Day 1**, I configured the **Splunk Universal Forwarder** on an Ubuntu Desktop VM to send **Apache web server logs** to **Splunk Enterprise** on my Windows laptop. I performed searches to detect suspicious activity (e.g., 404 errors, admin path requests) and visualized results — simulating real-world SOC threat detection.
+
+---
+
+## 🔧 Day 1: Forwarding Apache Logs & Detecting Suspicious Activity
+
+###  Objective
+
+Set up log forwarding from Apache on an Ubuntu VM to Splunk Enterprise, analyze logs for potential threats and create visualizations to support SOC analysis.
+
+---
+
+###  Lab Environment
+
+| Component        | Details                                               |
+|------------------|--------------------------------------------------------|
+| **Host**         | Windows laptop running Splunk Enterprise (`http://localhost:8000`) |
+| **VM**           | Ubuntu Desktop (in VirtualBox) with Apache and Splunk Universal Forwarder |
+| **Tools Used**   | Splunk Enterprise, Splunk Universal Forwarder, Apache2, Firefox, curl |
+
+---
+
+###  Setup Instructions
+
+1. **Start Splunk Enterprise (Windows)**:
+    ```bash
+    "C:\Program Files\Splunk\bin\splunk" start
+    ```
+    - Enable data receiving on **port 9997** via:
+      ```
+      Settings > Forwarding and Receiving > Receive Data
+      ```
+
+2. **Configure Splunk Universal Forwarder (Ubuntu VM)**:
+    ```bash
+    /opt/splunkforwarder/bin/splunk start
+    /opt/splunkforwarder/bin/splunk add forward-server 192.168.56.1:9997 -auth admin:<password>
+    ```
+
+3. **Install and Start Apache2 (Ubuntu VM)**:
+    ```bash
+    sudo apt install apache2 -y
+    sudo systemctl start apache2
+    ```
+  
+
+4. **Forward Apache Logs to Splunk**:
+    ```bash
+    /opt/splunkforwarder/bin/splunk add monitor /var/log/apache2/access.log -sourcetype access_combined -index main
+    /opt/splunkforwarder/bin/splunk restart
+    ```
+
+---
+
+###  Lab Activities
+
+#### 🔹 Generate Logs:
+- Visit invalid paths (e.g., `/test123`, `/wp-admin`) using Firefox.
+- Use `curl` for non-existent pages:
+
+#### 🔹 Perform Splunk Searches:
+
+- **All events**:
+    ```spl
+    index=main sourcetype=access_combined
+    ```
+
+- **404 Errors**:
+    ```spl
+    index=main sourcetype=access_combined status=404
+    ```
+
+- **Admin Path Access**:
+    ```spl
+    index=main sourcetype=access_combined uri_path IN ("/admin*", "/wp-admin*")
+    ```
+
+#### 📊 Visualizations:
+- Created **Column Chart** of 404 errors grouped by `uri_path`
+- Saved search as: `"404 Error URLs"`
+
+---
+
+
+- **404 Errors Search**  
+  ![404 Errors](screenshots/day1_404_errors.png)
+
+- **Admin Path Requests Search**  
+  ![Admin Paths](screenshots/day1_admin_paths.png)
 
 
 
-
-Install Apache (Ubuntu VM):
-
-Installed Apache: sudo apt install apache2 -y.
-Started service: sudo systemctl start apache2.
-Verified at http://localhost in Firefox.
+---
 
 
-Configure Log Forwarding:
-
-Monitored Apache logs: /opt/splunkforwarder/bin/splunk add monitor /var/log/apache2/access.log -sourcetype access_combined -index main.
-Restarted Forwarder: /opt/splunkforwarder/bin/splunk restart.
-
-
-
-Lab Steps
-
-Generate Logs:
-
-Visited http://localhost in Firefox and requested non-existent URLs (e.g., /test123, /wp-admin).
-Used curl: curl http://localhost/nonexistent.
-
-
-Splunk Searches:
-
-Viewed all events:index=main sourcetype=access_combined
-
-
-Detected 404 errors:index=main sourcetype=access_combined status=404
-
-
-Identified admin path requests:index=main sourcetype=access_combined uri_path IN ("/admin*", "/wp-admin*")
-
-
-
-
-Visualization:
-
-Created a column chart for 404 errors by uri_path.
-Saved as "404 Error URLs".
-
-
-
-Screenshots
-
-Search: 404 Errors:
-Search: Admin Path Requests:
-Visualization: 404 Errors by URI Path:
-
-Findings
-
-Identified multiple 404 errors, indicating potential scanning attempts.
-Detected requests to /wp-admin, a common target for attackers.
-Visualized 404 errors to prioritize suspicious URLs for SOC analysis.
-
-Next Steps
-
-Build a Splunk dashboard to monitor real-time threats.
-Simulate attacks (e.g., XSS) and detect them in Splunk.
-
-Repository Structure
-
-screenshots/: Contains Splunk search and visualization images.
-day1/: Notes and scripts from this lab.
-
-Usage
-Clone this repository and follow the setup instructions to replicate the lab. Use Splunk to analyze Apache logs and practice SOC threat detection.
-Contact
-Connect with me on LinkedIn for feedback or collaboration: [Insert LinkedIn Profile Link].
-#Splunk #SOCAnalyst #Cybersecurity #CSACertification
