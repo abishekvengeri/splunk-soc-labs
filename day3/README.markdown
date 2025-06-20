@@ -1,7 +1,7 @@
 # Day 3: Splunk SOC Lab - Automated Threat Detection with Alerts
 
 ## Overview
-On Day 3 of my Splunk journey for the Certified SOC Analyst (CSA) exam, I updated the Splunk Universal Forwarder to a new IP and troubleshooted alerts for excessive 404 errors and admin path requests.
+On Day 3 of my Splunk journey, I updated the Splunk Universal Forwarder to a new IP and troubleshooted alerts for excessive 404 errors and admin path requests.
 
 ## Objective
 Fix Forwarder IP, configure alerts, and resolve triggering issues.
@@ -42,23 +42,4 @@ Fix Forwarder IP, configure alerts, and resolve triggering issues.
      sleep 0.2
    done
    ```
-3. **Troubleshoot**:
-   - Checked logs: `index=main sourcetype=access_combined`.
-   - Adjusted 404 threshold to >5.
-   - Verified alerts: `index=_internal "Excessive 404 Errors" OR "Admin Path Requests"`.
 
-## Screenshots
-- **404 Alert Config**: ![404 Alert](screenshots/day3_404_alert.png)
-- **Admin Path Alert Config**: ![Admin Alert](screenshots/day3_admin_alert.png)
-- **Triggered Alert**: ![Triggered Alert](screenshots/day3_triggered_alert.png)
-
-## Findings
-- Restored log flow with new IP.
-- Alerts triggered after tuning threshold and increasing log volume.
-
-## Next Steps
-- Simulate SQL injection.
-- Add threat intelligence.
-
-## Repository
-See [README.md](../../README.md).
