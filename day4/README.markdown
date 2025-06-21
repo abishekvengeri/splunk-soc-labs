@@ -1,7 +1,7 @@
 # Splunk SOC Lab: Day 4 - Detecting SQL Injection Attacks
 
 ## Overview
-This repository documents Day 4 of a two-week Splunk lab series to prepare for the Certified SOC Analyst (CSA) exam. The lab simulates a SQL injection attack on an Apache web server, detects it using Splunk searches, and visualizes results in the "SOC Web Monitoring" dashboard. The setup uses Splunk Enterprise on Windows and a Splunk Universal Forwarder on an Ubuntu Desktop VM with Apache.
+This repository documents Day 4 of a two-week Splunk lab series. The lab simulates a SQL injection attack on an Apache web server, detects it using Splunk searches, and visualizes results in the "SOC Web Monitoring" dashboard. The setup uses Splunk Enterprise on Windows and a Splunk Universal Forwarder on an Ubuntu Desktop VM with Apache.
 
 ## Objectives
 - Simulate SQL injection attacks on an Apache web server.
@@ -17,22 +17,7 @@ This repository documents Day 4 of a two-week Splunk lab series to prepare for t
 ## Prerequisites
 - Splunk Enterprise installed on Windows.
 - Splunk Universal Forwarder and Apache installed on Ubuntu Desktop VM.
-- VirtualBox with host-only network adapter (e.g., VM IP: `192.168.56.101`).
-- Apache logging to `/var/log/apache2/access.log` with `sourcetype=access_combined`.
-
-## Setup Instructions
-1. **Start Splunk Enterprise (Windows)**:
-   ```bash
-   "C:\Program Files\Splunk\bin\splunk" start
-   ```
-2. **Start Forwarder and Apache (Ubuntu VM)**:
-   ```bash
-   /opt/splunkforwarder/bin/splunk start
-   sudo systemctl start apache2
-   ```
-3. **Verify Log Ingestion**:
-   - In Splunk, run: `index=main sourcetype=access_combined uri=*`.
-   - Ensure logs from `/var/log/apache2/access.log` appear.
+- VirtualBox with host-only network adapter .
 
 ## Lab Steps
 1. **Simulate SQL Injection**:
@@ -78,22 +63,3 @@ This repository documents Day 4 of a two-week Splunk lab series to prepare for t
      index=main sourcetype=access_combined uri="*id=*" OR uri="*query=*" OR uri="*search=*" | stats count by clientip, uri | sort -count
      ```
    - Save As > Report: "SQL Injection Analysis" (Table).
-
-## Results
-- Successfully detected SQL injection patterns (e.g., `id=1 OR 1=1`, `query=UNION SELECT`) in Apache logs.
-- Visualized attacks in the "SOC Web Monitoring" dashboard.
-- Analyzed top attacking IPs and payloads.
-
-## Screenshots
-- `day4_sql_search.png`: SQL injection search results.
-- `1.png`: Updated dashboard with SQL injection panel.
-- `2.png`: Log analysis of attack patterns.
-
-## Notes
-- Ensure Apache logs to `/var/log/apache2/access.log` with `combined` format.
-- Use a broad time range (e.g., Last 60 minutes) if logs are delayed.
-- This lab aligns with CSA exam topics: incident detection (26%) and response (29%).
-
-## Future Improvements
-- Create alerts for SQL injection attempts.
-- Integrate threat intelligence feeds.
