@@ -50,16 +50,18 @@ This repository documents Day 4 of a two-week Splunk lab series. The lab simulat
      index=main sourcetype=access_combined uri="*id=*" OR uri="*query=*" OR uri="*search=*" | table _time, clientip, uri, status | eval attack_type="SQL Injection"
      ```
    - Save As > Report: "SQL Injection Attempts" (Table).
+   - ![SQL Search](1.png)
 
 3. **Update Dashboard**:
    - In **Dashboards** > "SOC Web Monitoring" > **Edit**:
      - Add Panel > From Report > "SQL Injection Attempts".
      - Set Title: "SQL Injection Attempts", Time Range: Last 15 minutes.
      - Save.
-
+      ![Dashboard](2.png)
 4. **Analyze Logs**:
    - Run:
      ```spl
      index=main sourcetype=access_combined uri="*id=*" OR uri="*query=*" OR uri="*search=*" | stats count by clientip, uri | sort -count
      ```
    - Save As > Report: "SQL Injection Analysis" (Table).
+   - ![Log Analysis](3.png)
