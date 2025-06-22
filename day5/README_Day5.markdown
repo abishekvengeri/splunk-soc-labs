@@ -45,7 +45,6 @@ This repository documents Day 5 of a two-week Splunk lab series. The lab focuses
      - Alert Type: Scheduled
      - Schedule: Run every 5 minutes, Time Range: Last 5 minutes
      - Trigger Condition: Number of Results > 0
-     - Trigger Actions: Add to Triggered Alerts (Severity: High); (optional) Send Email to `<your-email>` if SMTP configured
      - Permissions: Shared in App
      - Save.
 
