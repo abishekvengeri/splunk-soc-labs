@@ -96,7 +96,7 @@ This repository documents Day 7 of a two-week Splunk lab series. The lab focuses
 
 ## Screenshots
 - **Lookup Configuration**:
-  ![Lookup Config](lookups .png)
+  ![Lookup Config](lookups.png)
 - **Search Results**:
   ![Search Results](search.png)
 - **Updated Dashboard**:
