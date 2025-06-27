@@ -1,7 +1,7 @@
 # Splunk SOC Lab: Day 8 - Creating Alerts for Detected Threats
 
 ## Overview
-This repository documents Day 8 of a two-week Splunk lab series. The lab focuses on creating alerts for high/medium threat IPs detected via a threat intelligence feed, displaying them in the Triggered Alerts section (no email), and updating the "SOC Web Monitoring" dashboard. The setup uses Splunk Enterprise on Windows and a Splunk Universal Forwarder on an Ubuntu Desktop VM with Apache.
+This repository documents Day 8 of a two-week Splunk lab series. The lab focuses on creating alerts for high/medium threat IPs detected via a threat intelligence feed, displaying them in the Triggered Alerts section , and updating the "SOC Web Monitoring" dashboard. The setup uses Splunk Enterprise on Windows and a Splunk Universal Forwarder on an Ubuntu Desktop VM with Apache.
 
 ## Objectives
 - Create alerts for high/medium threat IPs in Splunk, shown only in Triggered Alerts.
