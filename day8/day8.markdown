@@ -26,11 +26,11 @@ This repository documents Day 8 of a two-week Splunk lab series. The lab focuses
      ```
    - Click **Save As** > **Alert**.
    - Name: "High/Medium Threat IP Alert".
-   - Description: "Alert for detecting high or medium threat IPs from threat_intel.csv in Apache logs (UI only)".
+   - Description: "Alert for detecting high or medium threat IPs from threat_intel.csv in Apache logs".
    - Permissions: Shared in App (search).
    - Trigger Conditions: Number of results > 0, Trigger: Once.
-   - Trigger Actions: Add to Triggered Alerts (enabled).
-   - Schedule: Run every 5 minutes (Cron: `*/5 * * * *`), Time Range: Last 15 minutes.
+   - Trigger Actions: Add to Triggered Alerts .
+   - Schedule: Run every 5 minutes, Time Range: Last 15 minutes.
    - Save.
 
 2. **Simulate Traffic to Trigger Alert**:
@@ -75,6 +75,6 @@ This repository documents Day 8 of a two-week Splunk lab series. The lab focuses
 
 ## Screenshots
 - **Alert Configuration**:
-  ![Alert Config](screenshots/day8_alert_config.png)
+  ![Alert Config](alert_config.png)
 - **Triggered Alert**:
-  ![Triggered Alert](screenshots/day8_alert_triggered.png)
+  ![Triggered Alert](triggered.png)
