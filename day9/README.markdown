@@ -80,3 +80,8 @@ This repository documents Day 9 of  Splunk lab series . The lab focuses on creat
    - Wait 15 minutes .
    - Check log: `cat /var/log/alerts.log` .
    - Alert ran successfully  with results, 
+## Screenshots
+- **Alert Configuration**:
+  ![Alert Config](alert.png)
+- **Alert action config**:
+  ![Triggered Alert](alertaction.png)
