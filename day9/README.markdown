@@ -1,42 +1,18 @@
 # Splunk SOC Lab: Day 9 - Enhancing Threat Detection with a New Alert and Script Action
 
 ## Overview
-This repository documents Day 9 of a two-week Splunk lab series to prepare for the Certified SOC Analyst (CSA) exam. The lab focuses on creating the "Coordinated Login Attack Detection" alert, adding a custom script action to log details, testing the automation, and updating the "SOC Web Monitoring" dashboard. The setup uses Splunk Enterprise on Windows and a Splunk Universal Forwarder on an Ubuntu Desktop VM with Apache.
+This repository documents Day 9 of  Splunk lab series . The lab focuses on creating the "Coordinated Login Attack Detection" alert, adding a custom script action to log details, testing the automation,. The setup uses Splunk Enterprise on Windows and a Splunk Universal Forwarder on an Ubuntu Desktop VM with Apache.
 
 ## Objectives
 - Create a new alert to detect coordinated login attacks.
 - Add a custom script action to log alert details.
 - Test the automation with simulated traffic.
-- Update the dashboard with real-time alert status.
+
 
 ## Environment
-- **Host**: Windows laptop with Splunk Enterprise (`http://<new_windows_ip>:8000`).
-- **VM**: Ubuntu Desktop (VirtualBox) with Splunk Universal Forwarder and Apache (e.g., VM IP: `192.168.56.101`).
+- **Host**: Windows laptop with Splunk Enterprise .
+- **VM**: Ubuntu Desktop (VirtualBox) with Splunk Universal Forwarder and Apache 
 - **Tools**: Splunk, Apache, curl.
-
-## Prerequisites
-- Splunk Enterprise installed on Windows.
-- Splunk Universal Forwarder and Apache installed on Ubuntu Desktop VM.
-- VirtualBox with host-only network adapter configured.
-- Apache logging to `/var/log/apache2/access.log` with `sourcetype=access_combined` from Day 7.
-- "SOC Web Monitoring" dashboard from previous tasks.
-
-## Setup Instructions
-1. **Start Splunk Enterprise (Windows)**:
-   ```bash
-   "C:\Program Files\Splunk\bin\splunk" start
-   ```
-2. **Start Forwarder and Apache (Ubuntu VM)**:
-   ```bash
-   /opt/splunkforwarder/bin/splunk start
-   sudo systemctl start apache2
-   ```
-3. **Verify Log Ingestion**:
-   - In Splunk, run:
-     ```spl
-     index=main sourcetype=access_combined
-     ```
-   - Ensure logs appear.
 
 ## Lab Steps
 1. **Create Simulated Failed Login Data**:
@@ -101,50 +77,6 @@ This repository documents Day 9 of a two-week Splunk lab series to prepare for t
 
 5. **Test the Automation**:
    - Run simulation: `sudo ./simulate_failed_logins.sh`.
-   - Wait 15 minutes (e.g., until 8:30 PM IST on Jul 8, 2025).
-   - Check log: `cat /var/log/alerts.log` (currently empty, under troubleshooting).
-   - Alert ran successfully from 8:15 PM to 8:45 PM IST with 26 results, but script action not logging.
-
-6. **Update Dashboard**:
-   - In **Dashboards** > "SOC Web Monitoring" > **Edit**:
-     - Add Panel > Create New.
-     - Search: `| inputlookup /var/log/alerts.log | table _time, uri_path, unique_ips, count`.
-     - Panel Title: "Alert Status".
-     - Format: Table.
-     - Save (pending log data).
-
-## Adding Screenshots to Repository
-1. **Save Screenshots**:
-   - `day9_alert_config.png`: Alert configuration.
-   - `day9_alert_action_config.png`: `alert_actions.conf` content.
-   - `day9_alert_log.png`: Script output log (to be updated).
-   - `day9_dashboard.png`: Updated dashboard (to be updated).
-2. **Add to GitHub**:
-   - Create a folder:
-     ```bash
-     mkdir screenshots
-     mv day9_alert_config.png day9_alert_action_config.png day9_alert_log.png day9_dashboard.png screenshots/
-     ```
-   - Add and commit:
-     ```bash
-     git add screenshots/*.png
-     git commit -m "Add Day 9 screenshots"
-     git push origin main
-     ```
-3. **Link in README**:
-   - Embed screenshots (update when available).
-
-## Results
-- Successfully created the "Coordinated Login Attack Detection" alert, triggered at 8:15 PM IST with 26 results.
-- Manually configured `alert_actions.conf` for script action.
-- Script works manually (`/opt/splunkforwarder/bin/log_alert.sh "/login" 3 6`), but automation not logging (under investigation).
-- Dashboard update pending log data.
-
-## Troubleshooting
-- Checked Splunk logs: `index=_internal sourcetype=splunkd component=Script` for errors.
-- Verified permissions: `sudo chown splunk:splunk /var/log/alerts.log; sudo chmod 664 /var/log/alerts.log`.
-- Next: Debug script action with `/tmp/debug.log` (see updated `log_alert.sh`).
-
-## Future Improvements
-- Resolve script action issue for automated logging.
-- Add escalation scripts for Day 10.
+   - Wait 15 minutes .
+   - Check log: `cat /var/log/alerts.log` .
+   - Alert ran successfully  with results, 
