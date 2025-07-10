@@ -92,3 +92,8 @@ This repository documents Day 10 of a  Splunk lab series. The lab focuses on aut
 ## Results
 - Successfully automated alert escalation via email.
 
+## Screenshots
+- **Script**:
+  ![Script](script.png)
+- **email-alert**:
+  ![Email](email.png)
